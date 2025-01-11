@@ -56,5 +56,5 @@ func main() {
 	red := red_total / (x_max * y_max)
 	green := green_total / (x_max * y_max)
 	blue := blue_total / (x_max * y_max)
-	color.RGB(red, green, blue).Printf("R:%d, G:%d, B:%d\n■■■■■■■■■■", red, green, blue)
+	color.RGB(red, green, blue).Printf("R:%d, G:%d, B:%d\n#%x%x%x\n■■■■■■■■■■", red, green, blue, red, green, blue)
 }
