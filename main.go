@@ -3,8 +3,11 @@ package main
 import (
 	"bytes"
 	"flag"
+	"image"
+	"image/jpeg"
 	"image/png"
 	"os"
+	"path/filepath"
 
 	"github.com/fatih/color"
 )
@@ -14,6 +17,7 @@ func main() {
 	file_path := flag.Arg(0)
 
 	var (
+		img         image.Image
 		red_total   int
 		green_total int
 		blue_total  int
@@ -25,7 +29,14 @@ func main() {
 	}
 
 	reader := bytes.NewReader(filebyte)
-	img, error := png.Decode(reader)
+
+	extension := filepath.Ext(file_path)
+	switch extension {
+	case ".png":
+		img, _ = png.Decode(reader)
+	case ".jpeg", ".jpg":
+		img, _ = jpeg.Decode(reader)
+	}
 	if error != nil {
 		panic(error)
 	}
