@@ -16,6 +16,8 @@ func main() {
 	flag.Parse()
 	file_path := flag.Arg(0)
 
+	extension := filepath.Ext(file_path)
+
 	var (
 		img         image.Image
 		red_total   int
@@ -29,16 +31,11 @@ func main() {
 	}
 
 	reader := bytes.NewReader(filebyte)
-
-	extension := filepath.Ext(file_path)
 	switch extension {
 	case ".png":
 		img, _ = png.Decode(reader)
 	case ".jpeg", ".jpg":
 		img, _ = jpeg.Decode(reader)
-	}
-	if error != nil {
-		panic(error)
 	}
 
 	x_max := img.Bounds().Max.X
